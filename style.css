@@ -1,6 +1,10 @@
 html, body
 {
-    margin:0; padding: 0; height: 100%; width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 body
@@ -21,6 +25,7 @@ body
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
 }
 
 .ol-popup:after, .ol-popup:before
@@ -48,4 +53,25 @@ body
     border-width: 11px;
     left: 50%;
     margin-left: -11px;
+}
+
+#logo
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.marker-icon
+{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #007bff;
+    border: 2px solid #ffffff;
 }

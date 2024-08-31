@@ -28,6 +28,9 @@ var layer = new ol.layer.Tile({
 class MapView extends ol.View {
   constructor(mapExtent, mapMinZoom, mapTileGrid) {
     const center = ol.extent.getCenter(mapExtent);
+    const zoom = 1;
+    const minZoom = 1;
+    const maxZoom = 6;
     const projection = ol.proj.get('PIXELS');
     const extent = mapExtent;
     const maxResolution = mapTileGrid.getResolution(mapMinZoom);
@@ -37,6 +40,9 @@ class MapView extends ol.View {
       center: center,
       projection: projection,
       extent: extent,
+      zoom: zoom,
+      minZoom: minZoom,
+      maxZoom: maxZoom,
       maxResolution: maxResolution,
       constrainOnlyCenter: constrainOnlyCenter
     });
@@ -109,7 +115,8 @@ const vectorLayer = new ol.layer.Vector({
     style: new ol.style.Style({
         image: new ol.style.Icon({
             src: 'https://openlayers.org/en/latest/examples/data/icon.png', // Example marker image
-            scale: 1 // Scale the icon to adjust its size
+            scale: 1, // Scale the icon to adjust its size
+            className: 'marker-icon'
         })
     })
 });
