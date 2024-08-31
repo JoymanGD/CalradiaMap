@@ -109,14 +109,16 @@ const vectorSource = new ol.source.Vector({
     features: [] // Start with an empty array
 });
 
+const imgElement = document.getElementById('marker-icon');
+
 // Create a vector layer to display the markers
 const vectorLayer = new ol.layer.Vector({
     source: vectorSource,
     style: new ol.style.Style({
         image: new ol.style.Icon({
-            src: 'https://openlayers.org/en/latest/examples/data/icon.png', // Example marker image
-            scale: 1, // Scale the icon to adjust its size
-            className: 'marker-icon'
+            img: imgElement,
+            imgSize: [32, 48],
+            displacement: [0, 24]
         })
     })
 });
@@ -127,7 +129,7 @@ map.addLayer(vectorLayer);
 const popup = new ol.Overlay({
     element: document.getElementById('popup'),
     positioning: 'bottom-center',
-    offset: [-30, -100]
+    offset: [-30, -124]
 });
 
 map.addOverlay(popup);
@@ -169,3 +171,23 @@ map.getView().fit(mapExtent, map.getSize());
 addMarker([2000, 900], 'Castle #1');
 addMarker([1000, 1000], 'Castle #2');
 addMarker([3500, 2500], 'Castle #3');
+
+const target = document.getElementById('map');
+const modify = new ol.interaction.Modify({
+    hitDetection: vectorLayer,
+    source: vectorSource,
+});
+modify.on('modifystart', function (evt) {
+    target.style.cursor = 'grabbing';
+});
+modify.on('modifyend', function (evt) {
+    target.style.cursor = 'pointer';
+});
+const overlaySource = modify.getOverlay().getSource();
+overlaySource.on('addfeature', function (evt) {
+    target.style.cursor = 'pointer';
+});
+overlaySource.on('removefeature', function (evt) {
+    target.style.cursor = '';
+});
+map.addInteraction(modify);

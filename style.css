@@ -66,12 +66,3 @@ body
     opacity: 0.35;
     pointer-events: none;
 }
-
-.marker-icon
-{
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #007bff;
-    border: 2px solid #ffffff;
-}
